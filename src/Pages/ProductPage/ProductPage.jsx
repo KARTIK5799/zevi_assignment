@@ -37,9 +37,15 @@ const ProductPage = () => {
       const isCategoryMatch =
         filters.categories.length === 0 ||
         filters.categories.includes(product.category);
+
+        const isPriceMatch =
+        (filters.priceRange.min === null || product.price >= filters.priceRange.min) &&
+        (filters.priceRange.max === null || product.price <= filters.priceRange.max);
   
-     return isCategoryMatch;
+      return isCategoryMatch && isPriceMatch;
     });
+  
+ 
   
     setFilteredProducts(filtered);
   };

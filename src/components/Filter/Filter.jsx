@@ -10,7 +10,7 @@ const Filter = ({ onFilterChange }) => {
   const [selectedPriceRange,setSelectedPriceRange]=useState({
     max:null,
     min:null
-})
+});
 
   const getCategories = async () => {
     try {
@@ -24,10 +24,10 @@ const Filter = ({ onFilterChange }) => {
     }
   };
 
-
   const handleFilterChange = () => {
     onFilterChange({
       categories: selectedCategories,
+      priceRange: selectedPriceRange,
     });
   };
 
@@ -57,20 +57,34 @@ const Filter = ({ onFilterChange }) => {
   };
 
   const PriceRangeOption = () => {
+    const priceRanges = [
+      { label: 'Under 100', max: 99 },
+      { label: 'Under 500', max: 499 },
+    ];
+  
     return (
       <div className={styles.filterOption}>
-        {Prices.map((price) => (
-          <label key={price}>
-
-            <input type="checkbox" name={price} id={price} 
-             checked={setSelectedPriceRange.includes(price)}
-             onChange={() => togglePriceRange(price)}/>
-          {price}
+        {priceRanges.map((range, index) => (
+          <label key={index}>
+            <input
+              type="checkbox"
+              name={range.label}
+              id={range.label}
+              checked={
+                selectedPriceRange.min !== null &&
+                selectedPriceRange.max !== null &&
+                selectedPriceRange.min <= range.max &&
+                selectedPriceRange.max >= range.max
+              }
+              onChange={() => togglePriceRange(range)}
+            />
+            {range.label}
           </label>
         ))}
       </div>
     );
   };
+  
 
   const RatingOption = () => {
     return (
@@ -99,7 +113,15 @@ const Filter = ({ onFilterChange }) => {
   };
 
   const togglePriceRange =(price)=>{
-
+    setSelectedPriceRange((prevRange) => {
+      if (prevRange.min === null || price < prevRange.min) {
+        return { ...prevRange, min: price };
+      } else if (prevRange.max === null || price > prevRange.max) {
+        return { ...prevRange, max: price };
+      } else {
+        return { min: null, max: null };
+      }
+    });
     
   }
 
