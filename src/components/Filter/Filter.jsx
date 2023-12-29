@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import styles from "./Filter.module.sass";
 import Accordian from "../Accordian/Accordian";
-import { Prices, Ratings } from "../../api/filterOption";
+import { Ratings } from "../../api/filterOption";
 import Products from "../../api/api";
 
 const Filter = ({ onFilterChange }) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedPriceRange,setSelectedPriceRange]=useState({
-    max:null,
-    min:null
-});
+//   const [selectedPriceRange,setSelectedPriceRange]=useState({
+//     max:null,
+//     min:null
+// });
 
   const getCategories = async () => {
     try {
@@ -70,13 +70,8 @@ const Filter = ({ onFilterChange }) => {
               type="checkbox"
               name={range.label}
               id={range.label}
-              checked={
-                selectedPriceRange.min !== null &&
-                selectedPriceRange.max !== null &&
-                selectedPriceRange.min <= range.max &&
-                selectedPriceRange.max >= range.max
-              }
-              onChange={() => togglePriceRange(range)}
+          
+             
             />
             {range.label}
           </label>
@@ -112,18 +107,7 @@ const Filter = ({ onFilterChange }) => {
     );
   };
 
-  const togglePriceRange =(price)=>{
-    setSelectedPriceRange((prevRange) => {
-      if (prevRange.min === null || price < prevRange.min) {
-        return { ...prevRange, min: price };
-      } else if (prevRange.max === null || price > prevRange.max) {
-        return { ...prevRange, max: price };
-      } else {
-        return { min: null, max: null };
-      }
-    });
-    
-  }
+
 
   return (
     <div className={styles.filterContainer}>
