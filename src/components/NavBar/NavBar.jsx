@@ -1,7 +1,7 @@
 import React from 'react'
 import Logo from '../Logo/Logo'
 import Search from '../Search/Search'
-import styles from './NavBar.module.css'
+import styles from './NavBar.module.sass'
 
 
 const NavBar = ({place}) => {

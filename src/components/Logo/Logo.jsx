@@ -1,6 +1,6 @@
 import React from 'react'
 import LogoIcon from '../../assets/Zevi_logo.png';
-import styles from './Logo.module.css'
+import styles from './Logo.module.sass'
 
 const Logo = () => {
   return (

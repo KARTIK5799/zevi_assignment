@@ -1,11 +1,17 @@
-import './App.css';
 
-function App() {
+import ProductPage from './Pages/ProductPage/ProductPage'
+// import SearchPage from './Pages/SearchPage/SearchPage'
+
+
+const App = () => {
   return (
-    <div className="App">
-     
+
+    <div>
+   {/* <SearchPage/> */}
+      <ProductPage/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
+

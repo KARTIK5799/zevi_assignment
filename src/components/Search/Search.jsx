@@ -1,6 +1,6 @@
 
 import SearchIcon from "../../assets/search.png";
-import styles from "./Search.module.css";
+import styles from "./Search.module.sass";
 
 const Search = ({ onClick, onBlur, productStyle }) => {
   return (
