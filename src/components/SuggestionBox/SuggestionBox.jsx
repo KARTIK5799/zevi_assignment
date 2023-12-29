@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styles from './SuggestionBox.module.sass';
 import Card from '../Card/Card';
 import Products from '../../api/api';
+import { Link } from 'react-router-dom';
 
 
 
 const SuggestionBox = () => {
-  const [suggestedProduct,setSuggestedProducts]=useState([]);
+  const [suggestedProduct, setSuggestedProducts] = useState([]);
 
-  const getSuggestedProducts=async()=>{
+
+  const getSuggestedProducts = async () => {
     try {
-      const data=await Products();
+      const data = await Products();
       setSuggestedProducts(data)
     } catch (error) {
       console.error(`their is something issue your data ${error}`)
@@ -18,19 +20,19 @@ const SuggestionBox = () => {
 
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getSuggestedProducts();
-   
-  },[])
 
-const limitedSuggestionProduct=suggestedProduct.slice(0,5);
+  }, [])
+
+  const limitedSuggestionProduct = suggestedProduct.slice(0, 5);
   return (
-   <div className={styles.container}>
-     <div className={styles.suggestionBox}>
-      <div className={styles.trendSection}>
-        <h3>Latest Trends</h3>
-       <div className={styles.cardSection}>
-       {limitedSuggestionProduct.map((product) => (
+    <div className={styles.container}>
+      <div className={styles.suggestionBox}>
+        <div className={styles.trendSection}>
+          <h3>Latest Trends</h3>
+          <div className={styles.cardSection}>
+            {limitedSuggestionProduct.map((product) => (
               <Card
                 key={product.id}
                 type="suggestion"
@@ -39,22 +41,29 @@ const limitedSuggestionProduct=suggestedProduct.slice(0,5);
                 image={product.image}
               />
             ))}
-       </div>
-       <div>
-       <h3>Popular suggestions</h3>
+          </div>
+          <div className={styles.downSection}>
+            <div>
+                  <h3>Popular suggestions</h3>
+                  <div className={styles.suggestionTitles}>
+                        {limitedSuggestionProduct.map((product) => (
+                          <p key={product.id}>{product.title.slice(0, 20)}</p>
+                        ))
+                        }
+                    </div>
+            </div>
 
-       <div className={styles.suggestionTitles}>
-       {limitedSuggestionProduct.map((product)=>(
-          <p key={product.id}>{product.title.slice(0,20)}</p>
-       ))
-       }
-       </div>
+            <div className={styles.showAll}>
+                <button>
+                  <Link to="/products" >Show All Products</Link>
+                </button>
+              </div>
 
-       </div>
+          </div>
+        </div>
       </div>
-    </div>
 
-   </div>
+    </div>
   );
 };
 

@@ -4,10 +4,12 @@ import Filter from "../../components/Filter/Filter";
 import Products from "../../api/api";
 import Card from "../../components/Card/Card";
 import styles from "./ProductPage.module.sass";
+import { useSearch } from '../../contexts/SearchContaxt';
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const { searchTerm } = useSearch();
 
   const fetchData = async () => {
     try {
@@ -21,6 +23,14 @@ const ProductPage = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const filtered = products.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  }, [searchTerm, products]);
+
 
   const handleFilterChange = (filters) => {
     const filtered = products.filter((product) => {

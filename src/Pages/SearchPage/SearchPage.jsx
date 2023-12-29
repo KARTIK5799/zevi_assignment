@@ -4,6 +4,7 @@ import styles from "./SearchPage.module.sass";
 import Search from "../../components/Search/Search";
 import SuggestionBox from "../../components/SuggestionBox/SuggestionBox";
 
+
 const SearchPage = () => {
 const[isSuggestionVisible,setIsSuggestionVisible]=useState(false)
 
@@ -13,7 +14,10 @@ setIsSuggestionVisible(true);
 }
 
 const handleSearchBlur=()=>{
-  setIsSuggestionVisible(false);
+  setIsSuggestionVisible(true);
+  setTimeout(() => {
+    setIsSuggestionVisible(false);
+  }, 1000);
 }
   return (
     <div className={styles.container}>
@@ -25,7 +29,9 @@ const handleSearchBlur=()=>{
       </div>
       <div className={styles.suggestionSection}>
         {isSuggestionVisible && <SuggestionBox />}
+
       </div>
+
     </div>
   );
 };
