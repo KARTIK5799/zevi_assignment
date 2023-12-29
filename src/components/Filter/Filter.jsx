@@ -27,7 +27,7 @@ const Filter = ({ onFilterChange }) => {
   const handleFilterChange = () => {
     onFilterChange({
       categories: selectedCategories,
-      priceRange: selectedPriceRange,
+    
     });
   };
 

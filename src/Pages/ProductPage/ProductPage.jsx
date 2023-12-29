@@ -38,11 +38,9 @@ const ProductPage = () => {
         filters.categories.length === 0 ||
         filters.categories.includes(product.category);
 
-        const isPriceMatch =
-        (filters.priceRange.min === null || product.price >= filters.priceRange.min) &&
-        (filters.priceRange.max === null || product.price <= filters.priceRange.max);
+        
   
-      return isCategoryMatch && isPriceMatch;
+      return isCategoryMatch ;
     });
   
  
