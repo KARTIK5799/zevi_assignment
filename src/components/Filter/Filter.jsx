@@ -7,6 +7,10 @@ import Products from "../../api/api";
 const Filter = ({ onFilterChange }) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedPriceRange,setSelectedPriceRange]=useState({
+    max:null,
+    min:null
+})
 
   const getCategories = async () => {
     try {
@@ -57,9 +61,11 @@ const Filter = ({ onFilterChange }) => {
       <div className={styles.filterOption}>
         {Prices.map((price) => (
           <label key={price}>
+
             <input type="checkbox" name={price} id={price} 
-            />
-            {price}
+             checked={setSelectedPriceRange.includes(price)}
+             onChange={() => togglePriceRange(price)}/>
+          {price}
           </label>
         ))}
       </div>
@@ -91,6 +97,11 @@ const Filter = ({ onFilterChange }) => {
         : [...prevCategories, category]
     );
   };
+
+  const togglePriceRange =(price)=>{
+
+    
+  }
 
   return (
     <div className={styles.filterContainer}>

@@ -38,12 +38,13 @@ const ProductPage = () => {
         filters.categories.length === 0 ||
         filters.categories.includes(product.category);
   
-     
+     return isCategoryMatch;
     });
   
     setFilteredProducts(filtered);
   };
-  
+
+
 
   return (
     <div>
